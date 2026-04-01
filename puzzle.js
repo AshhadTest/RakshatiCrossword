@@ -6,7 +6,7 @@
 
 export const PUZZLE = {
   ROWS: 17,
-  COLS: 17,
+  COLS: 13,
 
   words: [
     // ── ACROSS ──────────────────────────────────────────────
@@ -70,7 +70,7 @@ export const PUZZLE = {
       number: 16,
       direction: 'across',
       answer: 'QlJFQUNI',
-      row: 15, col: 2,
+      row: 16, col: 2,
       clue: 'Unauthorized access event'
     },
 
