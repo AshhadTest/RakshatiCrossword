@@ -70,7 +70,7 @@ export const PUZZLE = {
       number: 16,
       direction: 'across',
       answer: 'QlJFQUNI',
-      row: 16, col: 1,
+      row: 15, col: 2,
       clue: 'Unauthorized access event'
     },
 
