@@ -6,7 +6,7 @@
 
 export const PUZZLE = {
   ROWS: 17,
-  COLS: 13,
+  COLS: 14,
 
   words: [
     // ── ACROSS ──────────────────────────────────────────────
@@ -14,28 +14,28 @@ export const PUZZLE = {
       number: 2,
       direction: 'across',
       answer: 'Q09OVFJPTA==',
-      row: 0, col: 1,
+      row: 0, col: 2,
       clue: 'Safeguard that reduces risk'
     },
     {
       number: 3,
       direction: 'across',
       answer: 'U0lFTQ==',
-      row: 0, col: 9,
+      row: 0, col: 10,
       clue: 'Platform that correlates security events'
     },
     {
       number: 4,
       direction: 'across',
       answer: 'QVVESVQ=',
-      row: 2, col: 1,
+      row: 2, col: 2,
       clue: 'Formal check of controls'
     },
     {
       number: 5,
       direction: 'across',
       answer: 'QkFDS1VQ',
-      row: 2, col: 5,
+      row: 2, col: 8,
       clue: 'Copy you hope you never need'
     },
     {
