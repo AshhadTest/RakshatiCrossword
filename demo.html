@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OfficeCrossword – Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ENTRY SCREEN -->
+<div id="entry-screen" class="screen active">
+  <div class="entry-bg">
+    <div class="floating-icon" style="top:8%;left:5%;animation-delay:0s">🔐</div>
+    <div class="floating-icon" style="top:15%;right:8%;animation-delay:0.5s">🛡️</div>
+    <div class="floating-icon" style="top:70%;left:3%;animation-delay:1s">🔑</div>
+    <div class="floating-icon" style="top:80%;right:5%;animation-delay:1.5s">💻</div>
+    <div class="floating-icon" style="top:45%;left:90%;animation-delay:0.8s">🚨</div>
+  </div>
+  <div class="entry-card">
+    <div class="entry-logo">🏢</div>
+    <h1 class="entry-title">OFFICE<span>CROSSWORD</span></h1>
+    <p class="entry-subtitle">How well do you know office life?</p>
+    <div class="entry-form">
+      <input type="text" id="player-name" placeholder="Enter your name…" maxlength="24" autocomplete="off"/>
+      <button id="start-btn" onclick="startGame()">LET'S GO! 🚀</button>
+    </div>
+    <div id="live-count" class="live-count">👥 <span id="player-count">…</span> players online</div>
+  </div>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="game-screen" class="screen">
+  <header class="game-header">
+    <div class="header-left">
+      <span class="header-logo">🏢 OfficeCrossword</span>
+    </div>
+    <div class="header-center">
+      <div class="timer-box">
+        <span class="timer-label">TIME</span>
+        <span id="timer" class="timer-value">00:00</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="score-box">
+        <span class="score-label">SCORE</span>
+        <span id="score-display" class="score-value">0</span>
+      </div>
+      <button class="leaderboard-btn" onclick="showLeaderboard()">🏆</button>
+    </div>
+  </header>
+
+  <div class="game-body">
+    <div class="puzzle-panel">
+      <div id="crossword-grid" class="crossword-grid"></div>
+    </div>
+    <div class="clues-panel">
+      <div class="clues-section">
+        <h3 class="clues-heading across-heading">➡️ ACROSS</h3>
+        <ul id="across-clues" class="clues-list"></ul>
+      </div>
+      <div class="clues-section">
+        <h3 class="clues-heading down-heading">⬇️ DOWN</h3>
+        <ul id="down-clues" class="clues-list"></ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="active-clue-bar" class="active-clue-bar">
+    <span id="active-clue-text">Click a cell to start!</span>
+  </div>
+</div>
+
+<!-- COMPLETE SCREEN -->
+<div id="complete-screen" class="screen">
+  <div class="complete-card">
+    <div class="confetti-burst" id="confetti-burst"></div>
+    <div class="complete-emoji">🎉</div>
+    <h2 class="complete-title">WELL DONE!</h2>
+    <div class="complete-stats">
+      <div class="stat-box">
+        <span class="stat-num" id="final-score">0</span>
+        <span class="stat-label">Points</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num" id="final-time">0:00</span>
+        <span class="stat-label">Time</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num" id="final-rank">#–</span>
+        <span class="stat-label">Rank</span>
+      </div>
+    </div>
+    <button class="leaderboard-full-btn" onclick="showLeaderboard()">See Leaderboard 🏆</button>
+  </div>
+</div>
+
+<!-- LEADERBOARD MODAL -->
+<div id="leaderboard-modal" class="modal-overlay" onclick="hideLeaderboard(event)">
+  <div class="modal-card">
+    <h2 class="modal-title">🏆 LEADERBOARD</h2>
+    <div id="leaderboard-list" class="leaderboard-list"></div>
+    <button class="modal-close-btn" onclick="hideLeaderboard()">Close</button>
+  </div>
+</div>
+
+<!-- WORD CORRECT TOAST -->
+<div id="toast" class="toast"></div>
+
+<script type="module" src="game-demo.js"></script>
+</body>
+</html>
