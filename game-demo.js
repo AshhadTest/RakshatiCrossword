@@ -78,48 +78,65 @@ function buildGrid() {
   totalCells = actual;
 }
 
-// ── Render grid DOM ──────────────────────────────────────────
+// ── Render grid DOM (absolute positioning — pixel-perfect placement) ──
 function renderGrid() {
+  const CELL = 40;
+  const GAP  = 2;
+  const STEP = CELL + GAP;
+  const PAD  = 8;
+
   const container = document.getElementById('crossword-grid');
-  container.style.gridTemplateColumns = `repeat(${PUZZLE.COLS}, var(--cell-size))`;
-  container.style.gridTemplateRows    = `repeat(${PUZZLE.ROWS}, var(--cell-size))`;
   container.innerHTML = '';
+  container.style.display  = 'block';
+  container.style.position = 'relative';
+  container.style.width    = (PAD * 2 + PUZZLE.COLS * STEP - GAP) + 'px';
+  container.style.height   = (PAD * 2 + PUZZLE.ROWS * STEP - GAP) + 'px';
 
   for (let r = 0; r < PUZZLE.ROWS; r++) {
     for (let c = 0; c < PUZZLE.COLS; c++) {
       const cell = grid[r][c];
-      const div  = document.createElement('div');
-      div.className = 'grid-cell ' + (cell.answer ? 'active-cell' : 'blocked');
-      div.dataset.row = r;
-      div.dataset.col = c;
-      cell.el = div;
-
-      if (cell.answer) {
-        if (cell.number) {
-          const num = document.createElement('span');
-          num.className = 'cell-number';
-          num.textContent = cell.number;
-          div.appendChild(num);
-        }
-        const input = document.createElement('input');
-        input.type      = 'text';
-        input.maxLength = 1;
-        input.className = 'cell-input';
-        input.autocomplete = 'off';
-        input.autocorrect  = 'off';
-        input.spellcheck   = false;
-        input.dataset.row  = r;
-        input.dataset.col  = c;
-
-        input.addEventListener('focus',   () => onCellFocus(r, c));
-        input.addEventListener('keydown', (e) => onKeyDown(e, r, c));
-        input.addEventListener('input',   (e) => onInput(e, r, c));
-        input.addEventListener('click',   () => onCellClick(r, c));
-
-        div.appendChild(input);
-        cell.inputEl = input;
+      if (!cell.answer) {
+        const ghost = document.createElement('div');
+        ghost.style.display = 'none';
+        cell.el = ghost;
+        continue;
       }
 
+      const div = document.createElement('div');
+      div.className      = 'grid-cell active-cell';
+      div.dataset.row    = r;
+      div.dataset.col    = c;
+      div.style.position = 'absolute';
+      div.style.left     = (PAD + c * STEP) + 'px';
+      div.style.top      = (PAD + r * STEP) + 'px';
+      div.style.width    = CELL + 'px';
+      div.style.height   = CELL + 'px';
+      cell.el = div;
+
+      if (cell.number) {
+        const num = document.createElement('span');
+        num.className   = 'cell-number';
+        num.textContent = cell.number;
+        div.appendChild(num);
+      }
+
+      const input = document.createElement('input');
+      input.type         = 'text';
+      input.maxLength    = 1;
+      input.className    = 'cell-input';
+      input.autocomplete = 'off';
+      input.autocorrect  = 'off';
+      input.spellcheck   = false;
+      input.dataset.row  = r;
+      input.dataset.col  = c;
+
+      input.addEventListener('focus',   () => onCellFocus(r, c));
+      input.addEventListener('keydown', (e) => onKeyDown(e, r, c));
+      input.addEventListener('input',   (e) => onInput(e, r, c));
+      input.addEventListener('click',   () => onCellClick(r, c));
+
+      div.appendChild(input);
+      cell.inputEl = input;
       container.appendChild(div);
     }
   }
